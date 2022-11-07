@@ -5,6 +5,16 @@ type ActionData = {
     error: string | null;
 }
 
+function checkPassword(password: string): ActionData {
+    if(password.length < 8) return {
+        error: "Password is less than 8 characters"
+    };
+
+    return {
+        error: null
+    };
+}
+
 export const action: ActionFunction = async ({ request }): Promise<ActionData> => {
     const formData = await request.formData();
 
@@ -16,7 +26,8 @@ export const action: ActionFunction = async ({ request }): Promise<ActionData> =
             error: "Username or Password blank"
         }
     }
-    return { error: null };
+
+    return checkPassword(password);
 }
 
 
