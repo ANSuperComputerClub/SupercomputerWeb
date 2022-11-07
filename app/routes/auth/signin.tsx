@@ -18,6 +18,7 @@ function checkPassword(password: string): ActionData {
 export const action: ActionFunction = async ({ request }): Promise<ActionData> => {
     const formData = await request.formData();
 
+    // TODO: Make this type safe. I think the Remix docs have a way of doing this
     const username = formData.get("username");
     const password = formData.get("password");
 
@@ -27,7 +28,7 @@ export const action: ActionFunction = async ({ request }): Promise<ActionData> =
         }
     }
 
-    return checkPassword(password);
+    return checkPassword(password as string);
 }
 
 
